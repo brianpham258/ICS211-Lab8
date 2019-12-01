@@ -5,4 +5,4 @@ export const StyledForm = styled.form `
     box-shadow: 0 0 5px gray;
     padding: 10px;
     width: 300px;
-`
+`;
