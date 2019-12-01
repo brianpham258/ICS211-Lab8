@@ -1,5 +1,6 @@
 import React from 'react';
 import StyledMovie from './Movie';
+import StyledTitle from './Title';
 
 const MovieList = () => {
     const [movies, setMovies] = React.useState([]);
@@ -27,13 +28,17 @@ const MovieList = () => {
     }, []);
 
     return (
-        <ol>
+        <div>
+            <StyledTitle title="My Favourite Movies" subTitle="Marvel" />
+             <ol>
             {movies.map(movie => (
                 <StyledMovie key={movie.id}
                     name={movie.name} link={movie.link} color={movie.color} checked={movie.checked}
                 />
             ))}
-        </ol>
+            </ol>
+        </div>
+        
     );
 }
 
