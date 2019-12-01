@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 
 const Movie = ({ className, name, link, color, checked }) => {
     if(checked === true) {
