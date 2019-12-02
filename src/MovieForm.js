@@ -1,4 +1,6 @@
 import React from 'react';
+import styled from 'styled-components';
+import StyledMovieList from './MovieList';
 
 const MovieForm = () => {
     const [checkboxGroup, setCheckboxGroup] = React.useState([false, false, false]);
