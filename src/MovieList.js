@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import StyledMovie from './Movie';
 import StyledTitle from './Title';
+import { Link } from 'react-router-dom';
 
 const MovieList = ({ className, movies }) => {
     // const [movies, setMovies] = React.useState([]);
@@ -38,6 +39,7 @@ const MovieList = ({ className, movies }) => {
                 />
             ))}
             </ol>
+            <Link to="/">Back to Form</Link>
         </div>
         
     );

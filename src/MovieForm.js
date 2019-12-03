@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import StyledMovieList from './MovieList';
+// import StyledMovieList from './MovieList';
+import { useHistory } from 'react-router-dom';
 
 const MovieForm = ({ className, checkboxGroup ,movies, handleCheckboxCallback, handleFormCallback }) => {
     // const [checkboxGroup, setCheckboxGroup] = React.useState([false, false, false]);
     // const [showForm, setShowForm] = React.useState(true);
+    let history = useHistory();
     let enableSubmit = false;
 
     for (const checked of checkboxGroup) {
@@ -55,6 +57,8 @@ const MovieForm = ({ className, checkboxGroup ,movies, handleCheckboxCallback, h
                 }
             })();
         }
+
+        history.push('/results');
     }
 
     // if (showForm) {

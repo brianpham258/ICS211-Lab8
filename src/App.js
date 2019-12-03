@@ -2,6 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import StyledMovieForm from './MovieForm';
 import StyledMovieList from './MovieList';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from 'react-router-dom';
 
 const App = () => {
     const [movies, setMovies] = React.useState([]);
@@ -67,8 +72,29 @@ const App = () => {
         }
     }
 
-    if (showForm) return <StyledMovieForm checkboxGroup={checkboxGroup} movies={movies} handleCheckboxCallback={handleCheckbox} handleFormCallback={handleForm} />
-    else return <StyledMovieList movies={movies} />
+    return (
+        <Router>
+            <Switch>
+                <Route 
+                    exact path="/"
+                    render={ () => {
+                        setShowForm(true);
+                        return (
+                            <StyledMovieForm 
+                                checkboxGroup={checkboxGroup} 
+                                movies={movies} 
+                                handleCheckboxCallback={handleCheckbox} 
+                                handleFormCallback={handleForm} 
+                            />
+                        );
+                    }} 
+                />
+                <Route path="/results">
+                    <StyledMovieList movies={movies} />
+                </Route>
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;
