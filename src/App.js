@@ -5,6 +5,8 @@ import StyledMovieList from './MovieList';
 
 const App = () => {
     const [movies, setMovies] = React.useState([]);
+    const [checkboxGroup, setCheckboxGroup] = React.useState([false, false, false]);
+    const [showForm, setShowForm] = React.useState(true);
 
     React.useEffect( () => {
         (async () => {
@@ -26,10 +28,7 @@ const App = () => {
                 console.log('Fetch API Error: ' + error);
             }
         })();
-    }, []);
-
-    const [checkboxGroup, setCheckboxGroup] = React.useState([false, false, false]);
-    const [showForm, setShowForm] = React.useState(true);
+    }, [showForm]);
 
     const handleCheckbox = (event) => {
         const index = parseInt(event.target.value, 10);
