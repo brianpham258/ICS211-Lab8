@@ -2,30 +2,31 @@ import React from 'react';
 import styled from 'styled-components';
 import StyledMovieList from './MovieList';
 
-const MovieForm = () => {
-    const [checkboxGroup, setCheckboxGroup] = React.useState([false, false, false]);
-    const [showForm, setShowForm] = React.useState(true);
+const MovieForm = ({ className, checkboxGroup ,movies, handleCheckboxCallback, handleFormCallback }) => {
+    // const [checkboxGroup, setCheckboxGroup] = React.useState([false, false, false]);
+    // const [showForm, setShowForm] = React.useState(true);
     let enableSubmit = false;
 
     for (const checked of checkboxGroup) {
         if(checked) enableSubmit = true;
     }
 
-    const handleCheckbox = (event) => {
-        const index = parseInt(event.target.value, 10);
-        //console.log("index: " + index);
-        setCheckboxGroup([...checkboxGroup.slice(0, index), event.target.checked, ...checkboxGroup.slice(index + 1)]);
-    }
+    // const handleCheckbox = (event) => {
+    //     const index = parseInt(event.target.value, 10);
+    //     //console.log("index: " + index);
+    //     setCheckboxGroup([...checkboxGroup.slice(0, index), event.target.checked, ...checkboxGroup.slice(index + 1)]);
+    // }
 
-    const handleShowForm = (event) => {
-        setShowForm(() => {
-            let showForm = event.target.checked;
-            return showForm;
-        });
-    }
+    // const handleShowForm = (event) => {
+    //     setShowForm(() => {
+    //         let showForm = event.target.checked;
+    //         return showForm;
+    //     });
+    // }
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        handleFormCallback();
         for(let i = 0; i < checkboxGroup.length; i++) {
             (async () => {
                 try {
@@ -46,7 +47,7 @@ const MovieForm = () => {
                     if(!response.ok) throw Error(response.status + ': ' + response.statusText);
 
                     // change status of showForm to false
-                    if ( i === checkboxGroup.length - 1) setShowForm(false);
+                    // if ( i === checkboxGroup.length - 1) setShowForm(false);
                 }
                 catch(error) {
                     // Output Networking Errors if any
@@ -56,41 +57,32 @@ const MovieForm = () => {
         }
     }
 
-    if (showForm) {
+    // if (showForm) {
         //console.log("here if");
         return (
-            <form onSubmit={handleSubmit}>
-                <fieldset>
-                    <legend>Select your favourite movie:</legend>
-                    <label>
-                        <input type='checkbox' name='checkboxGroup' value='0' checked={checkboxGroup[0]} onChange={handleCheckbox}/>
-                        &nbsp;Advenger: End Game
-                    </label>
-                    <br/><br/>
-                    <label>
-                        <input type='checkbox' name='checkboxGroup' value='1' checked={checkboxGroup[1]} onChange={handleCheckbox}/>
-                        &nbsp;Advenger: Infinity War
-                    </label>
-                    <br/><br/>
-                    <label>
-                        <input type='checkbox' name='checkboxGroup' value='2' checked={checkboxGroup[2]} onChange={handleCheckbox}/>
-                        &nbsp;Advenger: Civil War
-                    </label>
-                    <br/><br/>
-                    
-                    {enableSubmit ? (
-                        <input type='button' value='Submit' onClick={handleSubmit}/>
-                    ) : (
-                        <input type='button' value='Submit' disabled/>
-                    )}
-                </fieldset>
-            </form>
+            <div>
+                { movies.map((movie, index) => (
+                    <React.Fragment key={movie.id}>
+                        <label>
+                            <input type="checkbox" name="checkboxGroup" value={index} checked={checkboxGroup[index]} onChange={handleCheckboxCallback} />
+                            &nbsp;{movie.name}
+                        </label>
+                        <br />
+                    </React.Fragment>
+                )) }
+                
+                {enableSubmit ? (
+                    <input type='button' value='Submit' onClick={handleSubmit}/>
+                ) : (
+                    <input type='button' value='Submit' disabled/>
+                )}
+            </div>
         );    
-    }
-    else {
-        //console.log("here else");
-        return <StyledMovieList />;
-    }
+    // }
+    // else {
+    //     //console.log("here else");
+    //     return <StyledMovieList />;
+    // }
 }
 
 const StyledMovieForm = styled(MovieForm)`

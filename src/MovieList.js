@@ -3,30 +3,30 @@ import styled from 'styled-components';
 import StyledMovie from './Movie';
 import StyledTitle from './Title';
 
-const MovieList = () => {
-    const [movies, setMovies] = React.useState([]);
+const MovieList = ({ className, movies }) => {
+    // const [movies, setMovies] = React.useState([]);
 
-    React.useEffect( () => {
-        (async () => {
-            try {
-                // Make an API Request and store the Response
-                const response = await fetch('http://192.168.33.10:3004/movies');
+    // React.useEffect( () => {
+    //     (async () => {
+    //         try {
+    //             // Make an API Request and store the Response
+    //             const response = await fetch('http://192.168.33.10:3004/movies');
 
-                // Output HTTP Errors if any
-                if(!response.ok) throw Error(response.status + ': ' + response.statusText);
+    //             // Output HTTP Errors if any
+    //             if(!response.ok) throw Error(response.status + ': ' + response.statusText);
 
-                // extract the JSON from the body of the Response
-                const result = await response.json();
+    //             // extract the JSON from the body of the Response
+    //             const result = await response.json();
 
-                // update the state variable
-                setMovies(result);
-            }
-            catch(error) {
-                // Output Networking Errors if any
-                console.log('Fetch API Error: ' + error);
-            }
-        })();
-    }, []);
+    //             // update the state variable
+    //             setMovies(result);
+    //         }
+    //         catch(error) {
+    //             // Output Networking Errors if any
+    //             console.log('Fetch API Error: ' + error);
+    //         }
+    //     })();
+    // }, []);
 
     return (
         <div>
