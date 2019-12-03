@@ -1,6 +1,6 @@
 {
   "name": "lab8-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "dependencies": {
     "ky": "^0.16.1",
